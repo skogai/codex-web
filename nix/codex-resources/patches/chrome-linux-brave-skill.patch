@@ -11,7 +11,7 @@
 +scripts/open-chrome-window.js
 +```
 +
-+Then wait 2 seconds and retry the browser-client setup once.
++Then wait 30 seconds after the browser starts before retrying browser-client setup once. The Codex Chrome Extension and native host bridge can take time to install, start, and register their socket after the browser window appears.
  
  
  ### 3. The native host manifest is not installed, or is invalid
@@ -20,7 +20,7 @@
  ### open-chrome-window.js
  
 -This script opens `about:blank` in a Google Chrome window for the same selected Chrome profile used by `check-extension-installed.js`. Use it only after the User gives permission.
-+This script opens a browser window for the selected Chrome automation profile. On Linux, the packaged script starts Brave from Nix under Xvfb with a fresh temporary profile configured for the Codex Chrome Extension and native host bridge. Use it only after the User gives permission.
++This script opens a browser window for the selected Chrome automation profile. On Linux, the packaged script starts Brave from Nix under Xvfb with a fresh temporary profile configured for the Codex Chrome Extension and native host bridge. Run the Linux browser process from a long-running background terminal/tool session tied to the current Codex session, and keep that session alive until browser work is finished; if it is launched as a detached one-shot process, Brave/Xvfb and the extension socket may disappear before browser-client can connect. Use it only after the User gives permission.
  
  From the plugin root, use `node_repl` to run:
  
